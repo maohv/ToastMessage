@@ -6,6 +6,14 @@ html {
   align-items: center;
   justify-content: center;
 }
+body > div {
+  margin: auto;
+}
+#toast {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+}
 .toast {
   height: 60px;
   display: flex;
@@ -16,10 +24,25 @@ html {
   min-width: 500px;
   padding: 10px 0;
   border-left: 4px solid;
-  box-shadow: 0, 5px, 8px rgba(0, 0, 0, 0.08);
-}
-.toast + .toast {
+  box-shadow: 0 2px 6px rgb(245, 245, 245);
   margin-top: 24px;
+  animation: slideInLeft ease 0.3s, fadeOut linear 1s 3s forwards;
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(calc(100% + 32px));
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+  }
 }
 .toast__icon,
 .toast__close {
@@ -59,4 +82,23 @@ html {
 }
 .toast--waring .toast__icon {
   color: #f1a82d;
+}
+
+.btn {
+  display: inline-block;
+  text-decoration: none;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: #fff;
+  padding: 12px 36px;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  border-radius: 50px;
+  cursor: pointer;
+}
+.btn--sucsess {
+  background-color: #20a779;
+}
+.btn--warning {
+  background-color: #f1a82d;
 }
