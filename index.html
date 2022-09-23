@@ -16,26 +16,67 @@
   <body>
     <div id="toast">
       <!--Sucsess-->
-      <div class="toast toast--success">
-        <div class="toast__icon">
-          <i class="fa-sharp fa-solid fa-circle-check"></i>
-        </div>
-        <div class="toast__body">
-          <h3 class="toast__title">Sucsess</h3>
-          <p class="toast__msg">
-            You only live once, but if you do it right, once is enough.
-          </p>
-        </div>
-        <div class="toast__close">
-          <i class="fa-solid fa-xmark"></i>
-        </div>
-      </div>
+      
     </div>
-    <div class="btn btn--sucsess">Show sucsess toast</div>
-    <div class="btn btn--warning">Show warning</div>
+    <div onclick="showSucsessToast();" class="btn btn--sucsess">Show sucsess toast</div>
+    <div onclick="showWarningToast();" class="btn btn--warning">Show warning</div>
 
     <script>
-      function toast() {}
+      //toast function
+      function toast({
+        title = '',
+        message = '',
+        type = 'info',
+        duration = 3000
+      }) {
+        const main = document.getElementById('toast');
+        if(main){
+          const toast = document.createElement('div');
+          const icons = {
+            success: 'fa-solid fa-circle-check',
+            warning: 'fa-solid fa-triangle-exclamation',
+          
+          };
+          const icon = icons[type];
+          const delay = (duration / 1000).toFixed(2);
+
+          toast.classList.add('toast', `toast--${type}`);
+          toast.style.animation = `slideInLeft ease 0.3s, fadeOut linear 1s ${delay}s forwards`;
+          toast.innerHTML = `
+                
+              <div class="toast__icon">
+                <i class="${icon}"></i>
+              </div>
+              <div class="toast__body">
+                <h3 class="toast__title">${title}</h3>
+                <p class="toast__msg">
+                  ${message}
+                </p>
+              </div>
+              <div class="toast__close">
+                <i class="fa-solid fa-xmark"></i>
+              </div>
+          `;
+          main.appendChild(toast);
+        }
+      }
+     
+      function showSucsessToast(){
+        toast({
+        title:'Thành công',
+        message:'Bạn đã đăng kí thành công.',
+        type:'success',
+        duration: 4000,
+      })
+      };
+      function showWarningToast(){
+        toast({
+        title:'Nghi ngờ',
+        message:'Tài khoản bạn nghi vấn.',
+        type:'warning',
+        duration: 1000,
+      })
+      }
     </script>
   </body>
 </html>
